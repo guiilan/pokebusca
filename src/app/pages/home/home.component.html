@@ -1,0 +1,77 @@
+<div class="navbar">
+    <div class="logo">
+        <img src="../../../assets/LOGO.svg">
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">Olá, {{userName}} <mat-icon matSuffix>arrow_drop_down</mat-icon>
+        </button>
+        <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+</div>
+
+<div style="background-color: #F4F4F4;">
+    <div class="container-body">
+        <div class="container-header">
+            <div>
+                <h1>PokeBusca</h1>
+                <h6>Procure seu pokemon!</h6>
+            </div>
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Nome ou Código</mat-label>
+                    <input type="text" [(ngModel)]="filtro" matInput>
+                    <mat-icon matSuffix (click)="filtrar()">search</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+        <hr>
+        <span>Exibindo {{pageIndex}} de 20 itens</span>
+        <hr>
+        <div class="container-list">
+            <div *ngFor="let pokemon of pageSlice">
+                <div class="card-pokemon">
+                    <img src={{pokemon.image}}>
+                    <div style="margin-left: 10px;">
+                        <span>
+                            {{pokemon.name}} #{{pokemon.id}} 
+                        </span><br>
+                        Ability : <span *ngFor="let ab of pokemon.abilities">
+                            {{ab.ability.name}}
+                        </span><br>
+                        Types : <span *ngFor="let typ of pokemon.types">
+                            {{typ.type.name}}
+                        </span>
+                    </div>
+
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div style="
+            display: flex;
+            justify-content: flex-end;
+        ">
+            <mat-paginator [length]="pokemonList.length" [pageSize]="5" (page)="OnPageChange($event)"></mat-paginator>
+            <button style="
+                -moz-transform: scaleX(-1);
+                -o-transform: scaleX(-1);
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+            " (click)="OnPageChange('s')">
+                <fa-icon [icon]="faFastForward"></fa-icon>
+            </button>
+            <button (click)="OnPageChange('e')">
+                <fa-icon [icon]="faFastForward"></fa-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <span>
+        &copy; Todos os Direitos Reservados
+    </span>
+</div>
