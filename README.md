@@ -4,7 +4,7 @@ PokeBusca
 
 ## 🚀 Considerações
 
-Projeto Criado por Guilherme Ilan para Registro dos seus dragões favoritos :D
+Projeto Criado por Guilherme Ilan para Registro dos seus Pokemons favoritos :D
 
 ## ⚙️ Ferramentas
 
