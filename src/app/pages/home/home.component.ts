@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   pokemonList: PokemonModel[]
+  pokemonListBkp: PokemonModel[]
   pageSlice: PokemonModel[]
   pageIndex: number;
   faFastForward = faFastForward;

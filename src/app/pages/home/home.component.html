@@ -9,13 +9,13 @@
             <div>
                 <mat-form-field appearance="fill">
                     <mat-label>Nome/Código</mat-label>
-                    <input type="text" [(ngModel)]="filtro" matInput>
-                    <mat-icon matSuffix (click)="filtrar()">search</mat-icon>
+                    <input type="text" (keydown.enter)="filtrar()" [(ngModel)]="filtro" matInput>
+                    <mat-icon matSuffix  (click)="filtrar()">search</mat-icon>
                 </mat-form-field>
             </div>
         </div>
         <hr>
-        <span>Exibindo {{pageIndex}} de 20 itens</span>
+        <span>Exibindo {{pageSlice.length}} de {{pokemonList.length}} itens</span>
         <hr>
         <div class="container-list">
             <div *ngFor="let pokemon of pageSlice; let i = index">
