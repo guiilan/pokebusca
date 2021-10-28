@@ -1,0 +1,13 @@
+<header class="navbar">
+    <div class="logo">
+        <img src="../../../assets/LOGO.svg">
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">Olá, {{userName}} <mat-icon matSuffix>arrow_drop_down</mat-icon>
+        </button>
+        <div class="dropdown-content">
+            <a (click)="clearSection()">Sair</a>
+            <a (click)="goToHome()">Home</a>
+        </div>
+    </div>
+</header>

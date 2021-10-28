@@ -1,91 +1,7 @@
-.navbar {
-    overflow: hidden;
-    background-color: black;
-    height: 5rem;
-    font-family: Arial;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-inline: 5rem;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100&display=swap');
 
-.footer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50px;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    span{
-        color: white;
-    }
-}
-
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.dropdown {
-    float: left;
-    overflow: hidden;
-}
-
-.logo{
-    color: white;
-}
-
-.dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-}
-
-.navbar a:hover,
-.dropdown:hover .dropbtn {
-    background-color: red;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-
-.dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-
-.dropdown:hover .dropdown-content {
-    display: block;
+body{
+    font-family: 'Roboto', sans-serif;
 }
 
 .container-list{
@@ -138,6 +54,22 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-transform: capitalize;
+
+
+    div{
+        margin-left: 10px; 
+        width: 100%;
+        cursor: pointer;
+    }
+
+    button{
+        background-color: green;
+        border-radius: 8px;
+        font-size: 12px;
+        padding: .5rem;
+        color: #f9f9f9;
+    }
 
     span:first-child{
         font-weight: 500;
@@ -146,3 +78,38 @@
 
 }
 
+@media screen and (max-width: 700px){
+    .container-header{
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .navbar{
+        padding-inline: 1rem;
+    }
+
+    .container-list{
+        img{
+            max-width: 20px;
+            max-height: 20px;
+        }
+    }
+
+    .container-body{
+        margin-inline: 0;
+    }
+
+    .card-pokemon{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;    
+
+        img{
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    }
+}

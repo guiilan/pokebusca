@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonModel } from 'src/app/models/PokemonModel';
 import { PokemonsService } from 'src/app/services/pokemons.service';
 import { faFastForward } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -15,10 +17,11 @@ export class HomeComponent implements OnInit {
   pageIndex : number;
   faFastForward = faFastForward;
   filtro: any;
-  userName: string
+
 
   constructor(
-    private pokerService: PokemonsService
+    private pokerService: PokemonsService,
+    private route: Router
   ) {
     this.pokemonList = []
     this.pageIndex = 5
@@ -26,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userName = localStorage.getItem("user")
+
     this.obterEstadoInicial()
   }
 
@@ -41,10 +44,22 @@ export class HomeComponent implements OnInit {
           obj.types = res.types
         })
       });
-     console.log(this.pokemonList)
      this.pageSlice = this.pokemonList.slice(0, 5)
     })
   }
+
+  changeImg(indice: number, id: number){
+    if(this.pageSlice[indice].image == `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`){
+        this.pageSlice[indice].image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`
+    }else{
+      this.pageSlice[indice].image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+    }
+  }
+
+  detalhes(pokemon: PokemonModel){
+    this.route.navigate(['/details', pokemon.id])
+  }
+
 
   filtrar(){
     if(this.filtro == ""){
@@ -54,11 +69,9 @@ export class HomeComponent implements OnInit {
         return obj.name.includes(`${this.filtro}`)
     })
     }
-    console.log(this.pageSlice)
   }
 
   OnPageChange(event?: any){
-    console.log(event)
     if(event == 's'){
       event = {previousPageIndex: 1, pageIndex: 0, pageSize: 5, length: 20} 
     }else if( event == 'e'){
@@ -72,5 +85,7 @@ export class HomeComponent implements OnInit {
     this.pageIndex = (event.pageIndex * 5) + 5
     this.pageSlice = this.pokemonList.slice(startIndex, endIndex)
   }
+
+
 
 }

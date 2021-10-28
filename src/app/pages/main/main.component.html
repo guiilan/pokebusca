@@ -1,3 +1,11 @@
-<p>main works!</p>
-<input [(ngModel)]="name">
-<button (click)="acessar()">Login</button>
+<div class="form-container">
+    <div class="form">
+        <div>
+            <label>Login</label>
+            <div>
+                <input [(ngModel)]="name" placeholder="Digite Seu Nome!" type="text">
+            </div>
+        </div>
+        <button (click)="acessar()">Acessar</button>
+    </div>
+</div>

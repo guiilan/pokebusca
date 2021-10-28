@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+<div  style="background-color: #F4F4F4; height: 100vh;" *ngIf="pokemonDetails">
+    <div class="container-details">
+        <h1> {{pokemonDetails.name}} #{{pokemonDetails.id}} </h1>
+        <div>
+            <div>
+                <span>Normal</span>
+                <div>
+                    <img src={{pokemonDetails.sprites.front_default}}>
+                    <img src={{pokemonDetails.sprites.back_default}}>
+                </div>
+            </div>
+            <div>
+                <span>Shiny</span>
+                <div>
+                    <img src={{pokemonDetails.sprites.front_shiny}}>
+                    <img src={{pokemonDetails.sprites.back_shiny}}>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>Caractéristicas</h3>
+                Ability : <span *ngFor="let ab of pokemonDetails.abilities">
+                    {{ab.ability.name}}
+                </span><br>
+                Tipos : <span *ngFor="let typ of pokemonDetails.types">
+                    {{typ.type.name}}
+                </span><br>
+                Peso: {{pokemonDetails.weight}}<br>
+                <span *ngFor="let status of pokemonDetails.stats">
+                   Status : {{status.stat.name}} / Status Base : {{status.base_stat}}<br>
+                </span><br>
+        </div>
+    </div>
+    
+</div>
