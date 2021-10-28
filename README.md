@@ -1,6 +1,6 @@
 # Título do projeto
 
-Search Dragons
+PokeBusca
 
 ## 🚀 Considerações
 
@@ -19,6 +19,8 @@ Para bastar colocar seu nome na tela inicial
 ## 📦 Uso
 
 Para rodar a aplicação rode o comando abaixo em sem terminal 
+
+  $ npm i
 
   $ ng serve --port 9090 -o
   
