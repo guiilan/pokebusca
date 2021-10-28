@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   pokemonList: PokemonModel[]
-  pageSlice : any
-  pageIndex : number;
+  pageSlice: PokemonModel[]
+  pageIndex: number;
   faFastForward = faFastForward;
   filtro: any;
 
@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     private route: Router
   ) {
     this.pokemonList = []
+    this.pageSlice = []
     this.pageIndex = 5
     this.filtro = ""
   }
@@ -33,53 +34,57 @@ export class HomeComponent implements OnInit {
     this.obterEstadoInicial()
   }
 
-  obterEstadoInicial(){
+  obterEstadoInicial() {
     this.pokerService.getPokemons().subscribe((res) => {
       this.pokemonList = res.results;
       this.pokemonList.map(obj => {
         obj.id = +obj.url.split('/')[6];
+        obj.idNome = obj.id + obj.name 
         obj.image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${obj.id}.png`;
         this.pokerService.getDetail(obj.id).subscribe((res) => {
           obj.abilities = res.abilities
           obj.types = res.types
         })
       });
-     this.pageSlice = this.pokemonList.slice(0, 5)
+      this.pageSlice = this.pokemonList.slice(0, 5)
     })
   }
 
-  changeImg(indice: number, id: number){
-    if(this.pageSlice[indice].image == `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`){
-        this.pageSlice[indice].image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`
-    }else{
+  changeImg(indice: number, id: number) {
+    if (this.pageSlice[indice].image == `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`) {
+      this.pageSlice[indice].image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`
+    } else {
       this.pageSlice[indice].image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
     }
   }
 
-  detalhes(pokemon: PokemonModel){
+  detalhes(pokemon: PokemonModel) {
     this.route.navigate(['/details', pokemon.id])
   }
 
 
-  filtrar(){
-    if(this.filtro == ""){
+  filtrar() {
+    console.log(this.pokemonList)
+    if (this.filtro == "") {
       this.obterEstadoInicial()
-    }else{
-      this.pageSlice = this.pageSlice.filter(obj => {
-        return obj.name.includes(`${this.filtro}`)
-    })
+    } else {
+      this.pokemonList = this.pokemonList.filter(obj => {
+        return obj.idNome.includes(`${this.filtro}`)
+      })
+      this.pageSlice = this.pokemonList.slice(0, 5)
     }
+    console.log(this.pageSlice)
   }
 
-  OnPageChange(event?: any){
-    if(event == 's'){
-      event = {previousPageIndex: 1, pageIndex: 0, pageSize: 5, length: 20} 
-    }else if( event == 'e'){
-      event = {previousPageIndex: 2, pageIndex: 3, pageSize: 5, length: 20}
+  OnPageChange(event?: any) {
+    if (event == 's') {
+      event = { previousPageIndex: 1, pageIndex: 0, pageSize: 5, length: 20 }
+    } else if (event == 'e') {
+      event = { previousPageIndex: 2, pageIndex: 3, pageSize: 5, length: 20 }
     }
     const startIndex = event.pageIndex * event.pageSize
     let endIndex = startIndex + event.pageSize
-    if(endIndex > this.pokemonList.length){
+    if (endIndex > this.pokemonList.length) {
       endIndex = this.pokemonList.length
     }
     this.pageIndex = (event.pageIndex * 5) + 5
